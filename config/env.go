@@ -16,12 +16,11 @@ type variables struct {
 	DBName     string
 }
 
-var dbPort, _ = strconv.Atoi(os.Getenv("DB_PORT"))
-
 var Env variables
 
 func init() {
 	err := godotenv.Load()
+	var dbPort, _ = strconv.Atoi(os.Getenv("DB_PORT"))
 	if err != nil {
 		log.Fatalln("Unable to load env variables", err)
 	}

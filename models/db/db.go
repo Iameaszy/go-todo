@@ -26,7 +26,6 @@ func GetDbUrl() string {
 func Start() {
 	// Creating a connection to the database
 	var err error
-	log.Println("db url", GetDbUrl())
 	DB, err = gorm.Open(postgres.Open(GetDbUrl()), &gorm.Config{})
 
 	if err != nil {
@@ -35,4 +34,5 @@ func Start() {
 
 	// run the migrations: todo struct
 	DB.AutoMigrate(&models.Todo{})
+	DB.AutoMigrate(&models.User{})
 }

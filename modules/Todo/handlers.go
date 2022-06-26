@@ -1,4 +1,4 @@
-package TodoHandlers
+package todo
 
 import (
 	"log"
@@ -9,8 +9,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//List all todos
-func GetTodos(c *gin.Context) {
+type Handler struct{}
+
+func (h *Handler) GetTodos(c *gin.Context) {
 	var todo []models.Todo
 	err := TodoService.GetTodos(&todo)
 	if err != nil {
@@ -22,7 +23,7 @@ func GetTodos(c *gin.Context) {
 }
 
 //Create a Todo
-func CreateATodo(c *gin.Context) {
+func (h *Handler) CreateATodo(c *gin.Context) {
 	var todo models.Todo
 	c.BindJSON(&todo)
 	err := TodoService.CreateATodo(&todo)
@@ -34,7 +35,7 @@ func CreateATodo(c *gin.Context) {
 }
 
 //Get a particular Todo with id
-func GetATodo(c *gin.Context) {
+func (h *Handler) GetATodo(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var todo models.Todo
 	err := TodoService.GetATodo(id, &todo)
@@ -46,7 +47,7 @@ func GetATodo(c *gin.Context) {
 }
 
 // Update an existing Todo
-func UpdateATodo(c *gin.Context) {
+func (h *Handler) UpdateATodo(c *gin.Context) {
 	var todo models.Todo
 	id := c.Params.ByName("id")
 	c.BindJSON(&todo)
@@ -59,7 +60,7 @@ func UpdateATodo(c *gin.Context) {
 }
 
 // Delete a Todo
-func DeleteATodo(c *gin.Context) {
+func (h *Handler) DeleteATodo(c *gin.Context) {
 	var todo models.Todo
 	id := c.Params.ByName("id")
 	err := TodoService.DeleteATodo(id, &todo)
