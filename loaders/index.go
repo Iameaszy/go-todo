@@ -1,5 +1,6 @@
 package loaders
 
+// This is a loader index file
 import (
 	"todo/models/db"
 
